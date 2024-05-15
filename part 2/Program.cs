@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 public class Recipe
@@ -45,7 +45,6 @@ public class Recipe
         Console.WriteLine("Ingredients:");
         for (int i = 0; i < Ingredients.Count; i++)
         {
-            var originalQuantity = originalQuantities[i];
             var scaledQuantity = Ingredients[i].Quantity * scale;
             Console.WriteLine($"- {scaledQuantity} {Ingredients[i].Unit} {Ingredients[i].Name} ({Ingredients[i].Calories * scale} calories)");
         }
@@ -118,6 +117,12 @@ public class Ingredient
 
 class Program
 {
+    // Food groups as options
+    static readonly string[] foodGroups = {
+        "Vegetables", "Fruits", "Grains", "Protein Foods",
+        "Dairy", "Oils and Solid Fats", "Added Sugars", "Beverages"
+    };
+
     static void Main(string[] args)
     {
         List<Recipe> recipes = new List<Recipe>();
@@ -184,7 +189,13 @@ class Program
             double quantity = GetDoubleInput("Quantity: ");
             string unit = GetStringInput("Unit: ");
             int calories = GetIntInput("Calories: ");
-            string foodGroup = GetStringInput("Food Group: ");
+            Console.WriteLine("Select food group:");
+            for (int j = 0; j < foodGroups.Length; j++)
+            {
+                Console.WriteLine($"{j + 1}. {foodGroups[j]}");
+            }
+            int foodGroupChoice = GetIntInput("Food Group Number: ") - 1;
+            string foodGroup = foodGroups[foodGroupChoice];
             recipe.AddIngredient(name, quantity, unit, calories, foodGroup);
         }
 
