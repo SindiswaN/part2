@@ -6,3 +6,4 @@ Open a terminal or command prompt.
 Run the following command to compile the application:
 dotnet build
 Once the build is successful, run the following command to start the application:
+dotnet run
